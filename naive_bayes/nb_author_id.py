@@ -10,7 +10,7 @@
     Chris has label 1
 
 """
-    
+
 import sys
 from time import time
 sys.path.append("../tools/")
@@ -27,7 +27,20 @@ features_train, features_test, labels_train, labels_test = preprocess()
 
 #########################################################
 ### your code goes here ###
+from sklearn.naive_bayes import GaussianNB
+import numpy as np
 
+alg = GaussianNB()
+
+t0 = time()
+alg.fit(features_train, labels_train)
+print "Time for training: ", time()-t0, "s"
+
+t1 = time()
+labels_pred = alg.predict(features_test)
+print "Time for prediction: ", time()-t1, "s"
+
+print("Accuracy: " + str(np.mean(labels_pred == labels_test)))
 
 #########################################################
 
